@@ -1,0 +1,61 @@
+{% extends 'adminlayout.html'%}
+{% block content %}
+
+
+<div class="main-page">
+  <div class="tables">
+    <h2 class="title1"></h2>
+    <div class="panel-body widget-shadow">
+      <h4>Materials View:</h4>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th style="width: 226px;">Old Name</th>
+            <th>Old End Date</th>
+            <th>New Name</th>
+            <th>Add New End Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for t in t %}
+          <tr>
+            <td>1</td>
+            <td> {{t.name}}
+            </td>
+           <td>{{t.date}}</td>
+           <form action="/anewtime/{{t.id}}" method="POST">
+            {{form.hidden_tag()}}
+           <td> {% if form.name.errors %}
+            {{ form.name(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.name.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+        {% else %}
+            {{ form.name(class="form-control form-control-lg") }}
+        {% endif %}</td>
+
+        <td> {% if form.date.errors %}
+            {{ form.date(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.date.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+        {% else %}
+            {{ form.date(class="form-control form-control-lg") }}
+        {% endif %}</td>
+            <td><a href="">{{ form.submit(class="btn btn-outline-info") }}</a></td>
+        </form>
+          </tr>
+          {% endfor%}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
